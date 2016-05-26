@@ -16,6 +16,8 @@ func getConfig() Config{
 	rotors["I"] = RotorMap{ Map: "EKMFLGDQVZNTOWYHXUSPAIBRCJ", Step: "R", }
 	rotors["II"] = RotorMap{ Map: "AJDKSIRUXBLHWTMCQGZNPYFVOE", Step: "F",	}
 	rotors["III"] = RotorMap{	Map: "BDFHJLCPRTXVZNYEIWGAKMUSQO", Step: "W",	}
+	rotors["IV"] = RotorMap{	Map: "ESOVPZJAYQUIRHXLNFTGKDCMWB", Step: "K",	}
+	rotors["V"] = RotorMap{	Map: "VZBRGITYUPSDNHLXAWMJQOFECK", Step: "A",	}
 
 	reflectors := make(map[string]string)
   reflectors["B"] = "YRUHQSLDPXNGOKMIEBFZCWVJAT"

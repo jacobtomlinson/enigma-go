@@ -167,3 +167,18 @@ func TestStringEncodings(t *testing.T) {
               ProcessString(&settings, "BCJAHNTLJWBRXSNAXORSTNDEMFCGNUNYNTWSQYPBJDKDZFJUCSIU"),
               "they should be equal")
 }
+
+func TestAlternateRotors(t *testing.T) {
+  settings := SetupTestSettings()
+  settings.Rotors[0].Type = "IV"
+  assert.Equal(t, "HELLOWORLD",
+               ProcessString(&settings, "NFGSZVMIJQ"),
+               "they should be equal")
+
+   settings = SetupTestSettings()
+   settings.Rotors[0].Type = "V"
+   settings.Rotors[1].Type = "IV"
+   assert.Equal(t, "HELLOWORLD",
+                ProcessString(&settings, "OZHADGADIO"),
+                "they should be equal")
+}
