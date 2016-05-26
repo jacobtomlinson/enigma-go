@@ -38,14 +38,15 @@ func SetupTestSettings() Settings {
 func TestSingleLetter(t *testing.T) {
 
   settings := SetupTestSettings()
+  config := getConfig()
 
   t.Log("Testing letter H")
 
-  the_letter := ProcessLetter(&settings, "H")
+  the_letter := ProcessLetter("H", &settings, &config)
   assert.Equal(t, "X", the_letter, "they should be equal")
   assert.Len(t, the_letter, 1, "Should return a single letter")
 
-  the_letter = ProcessLetter(&settings, "E")
+  the_letter = ProcessLetter("E", &settings, &config)
   assert.Equal(t, "K", the_letter, "they should be equal")
   assert.Len(t, the_letter, 1, "Should return a single letter")
 }
@@ -53,19 +54,20 @@ func TestSingleLetter(t *testing.T) {
 func TestCharsSeparately(t *testing.T) {
 
   settings := SetupTestSettings()
+  config := getConfig()
 
   t.Log("Testing HELLOWORLD individually")
 
-  assert.Equal(t, "X", ProcessLetter(&settings, "H"), "they should be equal")
-  assert.Equal(t, "K", ProcessLetter(&settings, "E"), "they should be equal")
-  assert.Equal(t, "A", ProcessLetter(&settings, "L"), "they should be equal")
-  assert.Equal(t, "C", ProcessLetter(&settings, "L"), "they should be equal")
-  assert.Equal(t, "B", ProcessLetter(&settings, "O"), "they should be equal")
-  assert.Equal(t, "B", ProcessLetter(&settings, "W"), "they should be equal")
-  assert.Equal(t, "M", ProcessLetter(&settings, "O"), "they should be equal")
-  assert.Equal(t, "T", ProcessLetter(&settings, "R"), "they should be equal")
-  assert.Equal(t, "B", ProcessLetter(&settings, "L"), "they should be equal")
-  assert.Equal(t, "F", ProcessLetter(&settings, "D"), "they should be equal")
+  assert.Equal(t, "X", ProcessLetter("H", &settings, &config), "they should be equal")
+  assert.Equal(t, "K", ProcessLetter("E", &settings, &config), "they should be equal")
+  assert.Equal(t, "A", ProcessLetter("L", &settings, &config), "they should be equal")
+  assert.Equal(t, "C", ProcessLetter("L", &settings, &config), "they should be equal")
+  assert.Equal(t, "B", ProcessLetter("O", &settings, &config), "they should be equal")
+  assert.Equal(t, "B", ProcessLetter("W", &settings, &config), "they should be equal")
+  assert.Equal(t, "M", ProcessLetter("O", &settings, &config), "they should be equal")
+  assert.Equal(t, "T", ProcessLetter("R", &settings, &config), "they should be equal")
+  assert.Equal(t, "B", ProcessLetter("L", &settings, &config), "they should be equal")
+  assert.Equal(t, "F", ProcessLetter("D", &settings, &config), "they should be equal")
 }
 
 func TestStrings(t *testing.T) {
