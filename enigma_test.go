@@ -80,15 +80,15 @@ func TestFlow(t *testing.T) {
   assert.Equal(t, "G", letter, "they should be equal")
 
   // Rotor 1
-  letter = rotor(settings.Rotors[0], letter, true, &config)
+  letter = rotor(&settings.Rotors[0], letter, true, &config)
   assert.Equal(t, "O", letter, "they should be equal")
 
   // Rotor 2
-  letter = rotor(settings.Rotors[1], letter, true, &config)
+  letter = rotor(&settings.Rotors[1], letter, true, &config)
   assert.Equal(t, "M", letter, "they should be equal")
 
   // Rotor 3
-  letter = rotor(settings.Rotors[2], letter, true, &config)
+  letter = rotor(&settings.Rotors[2], letter, true, &config)
   assert.Equal(t, "O", letter, "they should be equal")
 
   // Reflector
@@ -96,15 +96,15 @@ func TestFlow(t *testing.T) {
   assert.Equal(t, "M", letter, "they should be equal")
 
   // Rotor 3
-  letter = rotor(settings.Rotors[2], letter, false, &config)
+  letter = rotor(&settings.Rotors[2], letter, false, &config)
   assert.Equal(t, "C", letter, "they should be equal")
 
   // Rotor 2
-  letter = rotor(settings.Rotors[1], letter, false, &config)
+  letter = rotor(&settings.Rotors[1], letter, false, &config)
   assert.Equal(t, "P", letter, "they should be equal")
 
   // Rotor 1
-  letter = rotor(settings.Rotors[0], letter, false, &config)
+  letter = rotor(&settings.Rotors[0], letter, false, &config)
   assert.Equal(t, "X", letter, "they should be equal")
 
   // Plugboard

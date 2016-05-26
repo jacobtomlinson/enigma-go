@@ -18,7 +18,7 @@ type Settings struct {
   Spacing int
 }
 
-func ProcessLetter(letter string, settings *Settings, config *Config) string{
+func ProcessLetter(letter string, settings *Settings, config *Config) string {
 
   if ! strings.Contains(config.ValidInput,letter){
     fmt.Println("Invalid character")
@@ -31,25 +31,25 @@ func ProcessLetter(letter string, settings *Settings, config *Config) string{
     letter = plugboard(settings.Plugboard, letter)
 
     // Rotor 1
-    letter = rotor(settings.Rotors[0], letter, true, config)
+    letter = rotor(&settings.Rotors[0], letter, true, config)
 
     // Rotor 2
-    letter = rotor(settings.Rotors[1], letter, true, config)
+    letter = rotor(&settings.Rotors[1], letter, true, config)
 
     // Rotor 3
-    letter = rotor(settings.Rotors[2], letter, true, config)
+    letter = rotor(&settings.Rotors[2], letter, true, config)
 
     // Reflector
     letter = reflector(config.Reflectors[settings.Reflector], letter, config)
 
     // Rotor 3
-    letter = rotor(settings.Rotors[2], letter, false, config)
+    letter = rotor(&settings.Rotors[2], letter, false, config)
 
     // Rotor 2
-    letter = rotor(settings.Rotors[1], letter, false, config)
+    letter = rotor(&settings.Rotors[1], letter, false, config)
 
     // Rotor 1
-    letter = rotor(settings.Rotors[0], letter, false, config)
+    letter = rotor(&settings.Rotors[0], letter, false, config)
 
     // Plugboard
     letter = plugboard(settings.Plugboard, letter)
@@ -59,7 +59,7 @@ func ProcessLetter(letter string, settings *Settings, config *Config) string{
   return letter
 }
 
-func ProcessString(settings *Settings, input string) string{
+func ProcessString(settings *Settings, input string) string {
   config := getConfig()
   returnString := ""
   for i := 0; i < len(input); i++ {

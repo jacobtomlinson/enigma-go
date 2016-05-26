@@ -4,7 +4,7 @@ import (
   "strings"
 )
 
-func rotor(rotor Rotor, letter string, direction bool, config *Config) string {
+func rotor(rotor *Rotor, letter string, direction bool, config *Config) string {
   rotorMap := config.Rotors[rotor.Type].Map
   rotation := strings.Index(config.ValidInput, rotor.Position)
   ringOffset := rotor.Ring
