@@ -9,10 +9,10 @@ func iterate(settings *Settings, config *Config) {
   shiftRotorTwo := false
   shiftRotorThree := false
 
-  if settings.Rotors[0].Position == config.Rotors[settings.Rotors[0].Type].Step {
+  if letterMaths(settings.Rotors[0].Position, 1, config) == config.Rotors[settings.Rotors[0].Type].Step {
     shiftRotorTwo = true
 
-    if settings.Rotors[1].Position == config.Rotors[settings.Rotors[1].Type].Step {
+    if letterMaths(settings.Rotors[1].Position, 1, config) == config.Rotors[settings.Rotors[1].Type].Step {
       shiftRotorThree = true
     }
   }
