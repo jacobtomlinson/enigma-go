@@ -1,26 +1,15 @@
 package enigma
 
-import (
-  "strings"
-)
-
-func rotor(rotor *Rotor, letter string, direction bool, config *Config) string {
+func rotor(rotor *Rotor, letter int, direction bool, config *Config) int {
   rotorMap := config.Rotors[rotor.Type].Map
-  rotation := strings.Index(config.ValidInput, rotor.Position)
+  rotation := rotor.Position
   ringOffset := rotor.Ring
 
-  letter = letterMaths(letter, rotation, config)
-  letter = letterMaths(letter, ringOffset, config)
-
   if direction {
-    index := strings.Index(config.ValidInput, letter)
-    letter = rotorMap[index:index+1]
+    letter = letter + rotorMap[modDelta(letter + rotation + ringOffset)][0]
   } else {
-    index := strings.Index(rotorMap, letter)
-    letter = config.ValidInput[index:index+1]
+    letter = letter + rotorMap[modDelta(letter + rotation + ringOffset)][1]
   }
 
-  letter = letterMaths(letter, -rotation, config)
-  letter = letterMaths(letter, -ringOffset, config)
-  return letter
+  return modDelta(letter)
 }

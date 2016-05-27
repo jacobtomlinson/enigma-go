@@ -8,9 +8,9 @@ import (
 func TestPlugboard(t *testing.T) {
   settings := SetupTestSettings()
 
-  assert.Equal(t, plugboard(settings.Plugboard, "A"), "B", "they should be equal")
-  assert.Equal(t, plugboard(settings.Plugboard, "D"), "C", "they should be equal")
-  assert.Equal(t, plugboard(settings.Plugboard, "G"), "H", "they should be equal")
-  assert.Equal(t, plugboard(settings.Plugboard, "H"), "G", "they should be equal")
-  assert.Equal(t, plugboard(settings.Plugboard, "Z"), "Z", "they should be equal")
+  assert.Equal(t, deltaToRune(plugboard(settings.Plugboard, runeToDelta('A'))), 'B', "they should be equal")
+  assert.Equal(t, deltaToRune(plugboard(settings.Plugboard, runeToDelta('B'))), 'A', "they should be equal")
+  assert.Equal(t, deltaToRune(plugboard(settings.Plugboard, runeToDelta('C'))), 'D', "they should be equal")
+  assert.Equal(t, deltaToRune(plugboard(settings.Plugboard, runeToDelta('D'))), 'C', "they should be equal")
+  assert.Equal(t, deltaToRune(plugboard(settings.Plugboard, runeToDelta('Z'))), 'Z', "they should be equal")
 }

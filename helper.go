@@ -1,14 +1,13 @@
 package enigma
 
-import (
-  "strings"
-)
+func runeToDelta(letter rune) int {
+  return int(letter) - 65
+}
 
-func letterMaths(letter string, number int, config *Config) string{
-    l_num := strings.Index(config.ValidInput, letter)
-    l_num += 26
-    l_num += number
-    l_num %= 26
-    letter = config.ValidInput[l_num:l_num+1]
-    return letter
+func deltaToRune(delta int) rune {
+  return rune(delta + 65)
+}
+
+func modDelta(delta int) int {
+  return (delta + 26) % 26
 }
