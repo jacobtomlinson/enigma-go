@@ -7,7 +7,7 @@ import (
 
 func TestIterateRotors(t *testing.T) {
   settings := SetupTestSettings()
-  config := getConfig()
+  config := GetConfig()
 
   assert.Equal(t, runeToDelta('A'), settings.Rotors[0].Position, "they should be equal")
   assert.Equal(t, runeToDelta('A'), settings.Rotors[1].Position, "they should be equal")

@@ -53,7 +53,7 @@ func TestSettings(t *testing.T) {
 func TestSingleLetter(t *testing.T) {
 
   settings := SetupTestSettings()
-  config := getConfig()
+  config := GetConfig()
 
   t.Log("Testing letter H")
 
@@ -66,7 +66,7 @@ func TestSingleLetter(t *testing.T) {
 
 // func TestFlow(t *testing.T) {
 //   settings := SetupTestSettings()
-//   config := getConfig()
+//   config := GetConfig()
 //   letter := "H"
 //
 //   iterate(&settings, &config)
@@ -111,7 +111,7 @@ func TestSingleLetter(t *testing.T) {
 func TestCharsSeparately(t *testing.T) {
 
   settings := SetupTestSettings()
-  config := getConfig()
+  config := GetConfig()
 
   t.Log("Testing HELLOWORLD individually")
 
@@ -128,53 +128,56 @@ func TestCharsSeparately(t *testing.T) {
 }
 
 func TestStrings(t *testing.T) {
+  config := GetConfig()
 
   settings := SetupTestSettings()
   input := "HELLOWORLD"
-  output := ProcessString(&settings, input)
+  output := ProcessString(&settings, input, &config)
   assert.Equal(t, "XKACBBMTBF", output, "they should be equal")
   assert.Equal(t, len(input), len(output), "Should be the same length")
 
   settings = SetupTestSettings()
   input = output
-  output = ProcessString(&settings, input)
+  output = ProcessString(&settings, input, &config)
   assert.Equal(t, "HELLOWORLD", output, "they should be equal")
   assert.Equal(t, len(input), len(output), "Should be the same length")
 }
 
 func TestStringEncodings(t *testing.T) {
+  config := GetConfig()
   settings := SetupTestSettings()
   assert.Equal(t, "OKPEXQVRGQJFNCFW",
-               ProcessString(&settings, "TESTTESTTESTTEST"),
+               ProcessString(&settings, "TESTTESTTESTTEST", &config),
                "they should be equal")
 
   settings = SetupTestSettings()
   assert.Equal(t, "TESTTESTTESTTEST",
-              ProcessString(&settings, "OKPEXQVRGQJFNCFW"),
+              ProcessString(&settings, "OKPEXQVRGQJFNCFW", &config),
               "they should be equal")
 
   settings = SetupTestSettings()
   assert.Equal(t, "BCJAHNTLJWBRXSNAXORSTNDEMFCGNUNYNTWSQYPBJDKDZFJUCSIU",
-               ProcessString(&settings, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"),
+               ProcessString(&settings, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ", &config),
                "they should be equal")
 
   settings = SetupTestSettings()
   assert.Equal(t, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ",
-              ProcessString(&settings, "BCJAHNTLJWBRXSNAXORSTNDEMFCGNUNYNTWSQYPBJDKDZFJUCSIU"),
+              ProcessString(&settings, "BCJAHNTLJWBRXSNAXORSTNDEMFCGNUNYNTWSQYPBJDKDZFJUCSIU", &config),
               "they should be equal")
 }
 
 func TestAlternateRotors(t *testing.T) {
+  config := GetConfig()
   settings := SetupTestSettings()
   settings.Rotors[0].Type = "IV"
   assert.Equal(t, "HELLOWORLD",
-               ProcessString(&settings, "NFGSZVMIJQ"),
+               ProcessString(&settings, "NFGSZVMIJQ", &config),
                "they should be equal")
 
    settings = SetupTestSettings()
    settings.Rotors[0].Type = "V"
    settings.Rotors[1].Type = "IV"
    assert.Equal(t, "HELLOWORLD",
-                ProcessString(&settings, "OZHADGADIO"),
+                ProcessString(&settings, "OZHADGADIO", &config),
                 "they should be equal")
 }

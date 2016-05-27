@@ -6,7 +6,7 @@ import (
 )
 
 func TestReflector(t *testing.T) {
-  config := getConfig()
+  config := GetConfig()
 
   assert.Equal(t, deltaToRune(reflector(config.Reflectors["B"], runeToDelta('A'), &config)), 'Y', "they should be equal")
   assert.Equal(t, deltaToRune(reflector(config.Reflectors["B"], runeToDelta('Y'), &config)), 'A', "they should be equal")

@@ -11,7 +11,7 @@ type RotorMap struct {
 	Step rune
 }
 
-func getConfig() Config{
+func GetConfig() Config{
 	rotors := make(map[string]RotorMap)
   alphabet := "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	rotors["I"] = RotorMap{ Map: rotorMapStringToArray("EKMFLGDQVZNTOWYHXUSPAIBRCJ"), Step: 'R', }

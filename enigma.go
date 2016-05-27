@@ -62,11 +62,10 @@ func ProcessLetter(letter rune, settings *Settings, config *Config) rune {
   return deltaToRune(letterDelta)
 }
 
-func ProcessString(settings *Settings, input string) string {
-  config := getConfig()
+func ProcessString(settings *Settings, input string, config *Config) string {
   returnString := ""
   for _, letter := range input {
-    returnString = returnString + string(ProcessLetter(letter, settings, &config))
+    returnString = returnString + string(ProcessLetter(letter, settings, config))
   }
   return returnString
 }
