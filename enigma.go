@@ -78,8 +78,8 @@ func LoadSettings(rotors []Rotor, plugboard [][2]rune, reflector string, spacing
 
   for _, plug := range plugboard {
     // Calculate deltas for characters in string and update newPlugboard
-    newPlugboard[int(plug[0])-65] = int(plug[1]) - int(plug[0])
-    newPlugboard[int(plug[1])-65] = int(plug[0]) - int(plug[1])
+    newPlugboard[runeToDelta(plug[0])] = int(plug[1]) - int(plug[0])
+    newPlugboard[runeToDelta(plug[1])] = int(plug[0]) - int(plug[1])
   }
 
   settings := Settings{

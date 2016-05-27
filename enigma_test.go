@@ -64,50 +64,6 @@ func TestSingleLetter(t *testing.T) {
   assert.Equal(t, 'K', the_letter, "they should be equal")
 }
 
-// func TestFlow(t *testing.T) {
-//   settings := SetupTestSettings()
-//   config := GetConfig()
-//   letter := "H"
-//
-//   iterate(&settings, &config)
-//
-//   // Plugboard
-//   letter = plugboard(settings.Plugboard, letter)
-//   assert.Equal(t, "G", letter, "they should be equal")
-//
-//   // Rotor 1
-//   letter = rotor(&settings.Rotors[0], letter, true, &config)
-//   assert.Equal(t, "O", letter, "they should be equal")
-//
-//   // Rotor 2
-//   letter = rotor(&settings.Rotors[1], letter, true, &config)
-//   assert.Equal(t, "M", letter, "they should be equal")
-//
-//   // Rotor 3
-//   letter = rotor(&settings.Rotors[2], letter, true, &config)
-//   assert.Equal(t, "O", letter, "they should be equal")
-//
-//   // Reflector
-//   letter = reflector(config.Reflectors[settings.Reflector], letter, &config)
-//   assert.Equal(t, "M", letter, "they should be equal")
-//
-//   // Rotor 3
-//   letter = rotor(&settings.Rotors[2], letter, false, &config)
-//   assert.Equal(t, "C", letter, "they should be equal")
-//
-//   // Rotor 2
-//   letter = rotor(&settings.Rotors[1], letter, false, &config)
-//   assert.Equal(t, "P", letter, "they should be equal")
-//
-//   // Rotor 1
-//   letter = rotor(&settings.Rotors[0], letter, false, &config)
-//   assert.Equal(t, "X", letter, "they should be equal")
-//
-//   // Plugboard
-//   letter = plugboard(settings.Plugboard, letter)
-//   assert.Equal(t, "X", letter, "they should be equal")
-// }
-
 func TestCharsSeparately(t *testing.T) {
 
   settings := SetupTestSettings()
@@ -145,6 +101,8 @@ func TestStrings(t *testing.T) {
 
 func TestStringEncodings(t *testing.T) {
   config := GetConfig()
+
+  // Test strings generated using http://enigma.louisedade.co.uk/enigma.html
   settings := SetupTestSettings()
   assert.Equal(t, "OKPEXQVRGQJFNCFW",
                ProcessString(&settings, "TESTTESTTESTTEST", &config),
@@ -164,6 +122,39 @@ func TestStringEncodings(t *testing.T) {
   assert.Equal(t, "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ",
               ProcessString(&settings, "BCJAHNTLJWBRXSNAXORSTNDEMFCGNUNYNTWSQYPBJDKDZFJUCSIU", &config),
               "they should be equal")
+
+  // String found at http://www.mlb.co.jp/linux/science/genigma/enigma-referat/node4.html
+  settings = LoadSettings(
+    []Rotor{
+      Rotor {
+        Type: "V",
+        Ring: 0,
+        Position: runeToDelta('A'),
+      },
+      Rotor {
+        Type: "I",
+        Ring: 0,
+        Position: runeToDelta('R'),
+      },
+      Rotor {
+        Type: "II",
+        Ring: 0,
+        Position: runeToDelta('F'),
+      },
+    },
+    [][2]rune {
+      {'A', 'B'},
+      {'I', 'R'},
+      {'U', 'X'},
+      {'K', 'P'},
+    },
+    "B",
+    0,
+  )
+  assert.Equal(t, "PCDAONONEBCJBOGLYMEEYGSHRYUBUJHMJOQZLEX",
+              ProcessString(&settings, "ANBULMEGRAZGOESTINGSTRENGGEHEIMEMELDUNG", &config),
+              "they should be equal")
+
 }
 
 func TestAlternateRotors(t *testing.T) {
