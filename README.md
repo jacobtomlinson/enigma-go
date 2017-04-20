@@ -15,39 +15,42 @@ go get github.com/jacobtomlinson/enigma-go
 ## Usage
 
 ```Go
+package main
+
 import (
-  "github.com/jacobtomlinson/enigma-go"
-  "fmt"
+	"github.com/jacobtomlinson/enigma-go"
+	"fmt"
 )
 
-func main(){
-  settings := enigma.Settings {
-    Rotors: [3]enigma.Rotor{
-      enigma.Rotor {
-        Type: "III",
-        Ring: 0,
-        Position: "A",
-      },
-      enigma.Rotor {
-        Type: "II",
-        Ring: 0,
-        Position: "A",
-      },
-      enigma.Rotor {
-        Type: "I",
-        Ring: 0,
-        Position: "A",
-      },
-    },
-    Plugboard: []string {
-    },
-    Reflector: "C",
-    Spacing: 0,
-  }
+func main() {
+	config := enigma.GetConfig()
+	settings := enigma.Settings{
+		Rotors: []enigma.Rotor{
+			enigma.Rotor{
+				Type:     "I",
+				Ring:     0,
+				Position: 0,
+			},
+			enigma.Rotor{
+				Type:     "II",
+				Ring:     0,
+				Position: 0,
+			},
+			enigma.Rotor{
+				Type:     "III",
+				Ring:     0,
+				Position: 0,
+			},
+		},
+		Plugboard: [26]int{
+		},
+		Reflector: "B",
+		Spacing:   0,
+	}
 
-  fmt.Println(enigma.ProcessString(&settings, "HELLOWORLD"))
+	fmt.Println(enigma.ProcessString(&settings, "HELLOWORLD", &config))
 
-  // Outputs "XKACBBMTBF"
+	// Outputs "MFNCZBBFZM"
 }
 
 ```
